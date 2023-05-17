@@ -4,6 +4,7 @@ pipeline:
     settings:
       repo: harbor.codemowers.eu/${CI_REPO}
       tags: latest
+      registry: harbor.codemowers.eu
       username:
         from_secret: docker_username
       password:
