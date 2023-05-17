@@ -1,0 +1,13 @@
+pipeline:
+  build:
+    image: golang:1.19
+    commands:
+      - go get
+      - go build
+  publish-docker-latest:
+    image: plugins/kaniko
+    settings:
+      repo: $CI_REPO
+      tags: latest
+    when:
+      branch: master
