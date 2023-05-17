@@ -2,7 +2,7 @@ pipeline:
   build:
     image: plugins/kaniko
     settings:
-      repo: $CI_REPO
+      repo: ${CI_REPO}
       tags: latest
       username:
         from_secret: docker_username
