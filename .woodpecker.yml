@@ -2,7 +2,7 @@ pipeline:
   build:
     image: golang:1.19
     commands:
-      - go get
+      - go get -u ./...
       - go build
   publish-docker-latest:
     image: plugins/kaniko
