@@ -10,13 +10,13 @@ steps:
     commands:
       - |
         cat << EOF > spec.yaml
-        image: "harbor.woodpecker.eu/${CI_REPO}:latest"
+        image: "harbor.codemowers.eu/${CI_REPO}:latest"
         manifests:
-          - image: "harbor.woodpecker.eu/${CI_REPO}:latest-amd64"
+          - image: "harbor.codemowers.eu/${CI_REPO}:latest-amd64"
             platform:
               architecture: amd64
               os: linux
-          - image: "harbor.woodpecker.eu/${CI_REPO}:latest-arm64"
+          - image: "harbor.codemowers.eu/${CI_REPO}:latest-arm64"
             platform:
               architecture: arm64
               os: linux
