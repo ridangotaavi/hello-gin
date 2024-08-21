@@ -1,0 +1,30 @@
+---
+skip_clone: true
+
+steps:
+  - name: manifest
+    image: mirror.gcr.io/mplatform/manifest-tool:alpine-v2.1.6
+    secrets:
+      - docker_username
+      - docker_password
+    commands:
+      - |
+        cat << EOF > spec.yaml
+        image: "harbor.woodpecker.eu/${CI_REPO}:latest"
+        manifests:
+          - image: "harbor.woodpecker.eu/${CI_REPO}:latest-amd64"
+            platform:
+              architecture: amd64
+              os: linux
+          - image: "harbor.woodpecker.eu/${CI_REPO}:latest-arm64"
+            platform:
+              architecture: arm64
+              os: linux
+        EOF
+      - /manifest-tool --username $docker_username --password $docker_password push from-spec spec.yaml > stdout
+      - cat stdout
+    when:
+      - branch: master
+
+depends_on:
+  - build
