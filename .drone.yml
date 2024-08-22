@@ -16,7 +16,7 @@ steps:
   - echo "ENV GIT_COMMIT_TIMESTAMP=$(git log -1 --format=%cd --date=iso-strict)" >> Dockerfile
   - cat Dockerfile
 - name: docker
-  image: mirror.gcr.io/codemowers/drone-kaniko
+  image: docker.io/codemowers/drone-kaniko:latest@sha256:0851432477117d2b3fad02c1b8d4d447b283e5b557c33ff4c93b437c64b8a66b
   settings:
     repo: ${DRONE_REPO}
     tags: latest-arm64
@@ -44,7 +44,7 @@ steps:
   - echo "ENV GIT_COMMIT_TIMESTAMP=$(git log -1 --format=%cd --date=iso-strict)" >> Dockerfile
   - cat Dockerfile
 - name: docker
-  image: mirror.gcr.io/codemowers/drone-kaniko
+  image: docker.io/codemowers/drone-kaniko:latest@sha256:0851432477117d2b3fad02c1b8d4d447b283e5b557c33ff4c93b437c64b8a66b
   settings:
     repo: ${DRONE_REPO}
     tags: latest-amd64
