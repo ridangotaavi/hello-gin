@@ -1,6 +1,34 @@
 ---
 kind: pipeline
 type: kubernetes
+name: build-arm64
+platform:
+  arch: arm64
+  os: linux
+node_selector:
+  kubernetes.io/arch: arm64
+steps:
+- name: submodules
+  image: alpine/git
+  commands:
+  - touch .gitmodules
+  - echo "ENV GIT_COMMIT=$(git rev-parse HEAD)" >> Dockerfile
+  - echo "ENV GIT_COMMIT_TIMESTAMP=$(git log -1 --format=%cd --date=iso-strict)" >> Dockerfile
+  - cat Dockerfile
+- name: docker
+  image: mirror.gcr.io/codemowers/drone-kaniko
+  settings:
+    repo: ${DRONE_REPO}
+    tags: latest-arm64
+    registry: harbor.codemowers.eu
+    storage_driver: vfs
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+---
+kind: pipeline
+type: kubernetes
 name: build-amd64
 platform:
   arch: amd64
